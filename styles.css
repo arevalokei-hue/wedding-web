@@ -1,0 +1,624 @@
+/* Importación de fuentes elegantes y románticas */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
+
+:root {
+  /* Tonos extraídos de tu moodboard otoñal */
+  --bg-cream: #F5EFEB;       /* Fondo claro crema/papel */
+  --text-dark: #3E2015;      /* Marrón oscuro para máxima legibilidad */
+  --card-orange: #DE6B21;    /* Naranja sólido */
+  --card-burgundy: #6D0F14;  /* Vino tinto */
+  --shadow: rgba(0, 0, 0, 0.08); /* Sombra muy suave para elegancia */
+}
+
+body {
+  /* Fondo base con gradiente radial para dar efecto de iluminación al centro */
+  background: radial-gradient(circle at 50% 20%, var(--bg-cream) 0%, #E4D5C7 100%);
+  color: var(--text-dark);
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* Capa de textura de papel generada con ruido SVG */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  /* Esto genera una textura visual de papel acuarela directamente en código */
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none; /* Para que no bloquee los clics en los botones */
+  z-index: -1;
+}
+
+/* =========================================
+   ESTRUCTURA BASE 
+========================================= */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 20px 12px;
+}
+
+.invitation {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 10px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.portada {
+  align-items: center;
+}
+
+/* =========================================
+   TIPOGRAFÍA Y TEXTOS
+========================================= */
+h1, h2, .title, .section-title {
+  font-family: 'Cinzel', serif;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.names-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 15px 0;
+}
+
+.names-container .title {
+  font-family: 'Alex Brush', cursive;
+  font-size: 4.8rem; /* Un poco más grande para compensar el trazo fino */
+  text-transform: none; /* Evitamos mayúsculas forzadas */
+  color: var(--card-burgundy);
+  letter-spacing: normal;
+  font-weight: 400;
+  margin: 10px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05); /* Sombra muy sutil para dar volumen */
+}
+
+.subtitle, .location, p, label, legend, small {
+  margin: 0;
+  font-weight: 300;
+}
+
+.subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* =========================================
+   IMÁGENES
+========================================= */
+.hero-image {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 15px; 
+  object-fit: cover;
+  box-shadow: 0 10px 25px var(--shadow);
+  margin-bottom: 10px;
+  border: 2px solid var(--text-dark);
+}
+
+/* Ocultamos los iconos pixel-art para mantener la elegancia */
+.pixel-icon {
+  display: none; 
+}
+
+/* =========================================
+   CUENTA REGRESIVA
+========================================= */
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.countdown-card {
+  background-color: var(--card-burgundy);
+  border-radius: 15px;
+  padding: 15px 5px;
+  text-align: center;
+  box-shadow: 0 4px 15px var(--shadow);
+  color: white;
+  border: none;
+}
+
+.countdown-card span {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+  color: white;
+}
+
+.countdown-card small {
+  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   TARJETAS DE DETALLES
+========================================= */
+.detail-card {
+  border-radius: 20px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px var(--shadow);
+  border: none;
+}
+
+/* Intercalamos los colores como en tu moodboard */
+.detail-card:nth-child(odd) {
+  background-color: var(--card-orange);
+  color: white;
+}
+
+.detail-card:nth-child(even) {
+  background-color: var(--card-burgundy);
+  color: white;
+}
+
+.detail-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.detail-card p {
+  color: white;
+  font-size: 0.95rem;
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  background-color: transparent;
+  color: var(--text-dark);
+  border: 2px solid var(--text-dark);
+  font-family: 'Cinzel', serif;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.btn:hover, .btn:focus-visible {
+  background-color: var(--text-dark);
+  color: var(--bg-cream);
+  transform: translateY(-2px);
+  filter: none;
+}
+
+/* Ajuste para centrar el botón de Google Maps */
+.detalles-lugar .btn {
+  max-width: 280px;      /* Evita que ocupe todo el ancho */
+  margin: 15px auto 0;   /* Lo centra horizontalmente */
+}
+
+/* Efecto de levitación para hacer la página más dinámica */
+.detail-card, .itinerary-item {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.detail-card:hover, .itinerary-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(109, 15, 20, 0.2); /* Sombra tono vino tinto */
+}
+
+/* Estilos para la nueva sección de la historia */
+.story-container {
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.5); /* Un fondo translúcido romántico */
+  border-radius: 15px;
+  border-left: 4px solid var(--card-orange);
+  text-align: left;
+  min-height: 100px;
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+.romantic-text {
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  line-height: 1.8;
+  display: inline;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s infinite;
+  color: var(--card-orange);
+  font-weight: bold;
+}
+
+@keyframes blink { 
+  50% { opacity: 0; } 
+}
+/* =========================================
+   GALERÍA (Sección nueva)
+========================================= */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.photo-placeholder {
+  background-color: var(--card-orange);
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Cinzel', serif;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px var(--shadow);
+  transition: transform 0.3s ease;
+  border: none;
+}
+
+.photo-placeholder:hover {
+  transform: scale(1.03);
+  background-color: var(--card-burgundy);
+}
+
+/* =========================================
+   FORMULARIO RSVP
+========================================= */
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+
+input, textarea, fieldset {
+  width: 100%;
+  border: 1px solid var(--text-dark);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-dark);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+input, textarea {
+  min-height: 48px;
+  padding: 12px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+fieldset {
+  min-height: 48px;
+  margin: 0;
+  padding: 15px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.radio-group label:hover {
+  background: white;
+  border-color: var(--card-orange);
+}
+
+.radio-group input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--card-orange);
+}
+
+.guest-chip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--text-dark);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.guest-chip.principal {
+  border: 2px solid var(--card-burgundy);
+  background: white;
+}
+
+.hint {
+  color: var(--text-dark);
+  opacity: 0.7;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* =========================================
+   ANIMACIONES (Hojas y Transiciones)
+========================================= */
+.hidden {
+  display: none !important;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.leaves-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  top: -50px; /* Inician un poco más arriba para que la caída sea más natural */
+  opacity: 0.8;
+  animation: fall linear infinite;
+}
+
+/* Esta nueva regla asegura que la hoja SVG herede el color y tamaño correctos */
+.leaf svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor; 
+}
+
+@keyframes fall {
+  0% { transform: translateY(-20px) rotate(0deg) translateX(0); }
+  100% { transform: translateY(100vh) rotate(360deg) translateX(50px); }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+@media (max-width: 520px) {
+  .page-wrapper {
+    padding: 0;
+  }
+  
+  .invitation {
+    max-width: 100%;
+    gap: 0;
+  }
+  
+  .section {
+    border-radius: 0;
+  }
+
+  .names-container .title {
+    font-size: 3.5rem;
+  }
+
+  .countdown-grid {
+    gap: 5px;
+  }
+}
+
+/* =========================================
+   ESTILOS COMPLEMENTARIOS PARA EL ITINERARIO
+========================================= */
+.itinerary-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.itinerary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px var(--shadow);
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.itinerary-item:hover {
+  transform: translateY(-2px);
+}
+
+/* Alternamos colores de fondo de las actividades */
+.itinerary-item:nth-child(odd) {
+  background-color: var(--card-orange);
+}
+
+.itinerary-item:nth-child(even) {
+  background-color: var(--card-burgundy);
+}
+
+.itinerary-item .time {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.itinerary-item .activity {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 0.95rem;
+  text-align: right;
+}
+/* =========================================
+   MARCO OTOÑAL (CALABAZAS Y HOJAS)
+========================================= */
+.autumn-corner {
+  position: fixed;
+  width: 80px; /* Puedes hacerlas más grandes o pequeñas según la imagen */
+  height: 80px;
+  pointer-events: none; 
+  z-index: 50; 
+  opacity: 0.95;
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* ¡Aquí conectas tu imagen real! */
+
+}
+
+.top-left {
+  top: -5px;
+  left: -10px;
+  background-image: url('flores.png');
+  transform: rotate(90deg); /* Ajusta o quita la rotación si la imagen ya viene en la posición ideal */
+}
+
+.top-right {
+  top: -5px;
+  right: -10px;
+  background-image: url('flores.png');
+  transform: rotate(180deg); /* Ajusta o quita la rotación si la imagen ya viene en la posición ideal */
+}
+
+.bottom-right {
+  bottom: -5px;
+  right: -10px;
+  background-image: url('flores.png');
+  transform: rotate(270deg);
+}
+
+.welcome-card {
+  background-color: var(--card-burgundy) !important;
+  color: white;
+  margin: 15px 0;
+  padding: 20px;
+}
+
+.welcome-card h3 {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.welcome-card p {
+  color: white;
+  font-size: 0.95rem;
+}
+
+.story-gallery {
+  width: 100%;
+  max-width: 400px; /* Aumentado 1.25x (antes 320px) */
+  height: 275px;    /* Aumentado 1.25x (antes 220px) */
+  margin: 10px 0 20px 0; 
+  border-radius: 15px;
+  box-shadow: 0 10px 25px var(--shadow);
+  border: 2px solid var(--text-dark);
+  overflow: hidden; 
+  z-index: 10; 
+}
+
+.story-gallery .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white; /* Fondo blanco por si la foto no carga rápido */
+}
+
+.story-gallery .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Recorta la foto para llenar el contenedor sin deformarse */
+  border-radius: 13px; /* Un poco menos que el contenedor para el efecto de borde */
+}
+
+/* Personalización de los puntos de paginación (opcional) */
+.story-gallery .swiper-pagination-bullet-active {
+  background: var(--card-burgundy);
+}
+
+.bottom-left {
+  bottom: -5px;
+  left: -10px;
+  background-image: url('flores.png');
+  transform: rotate(0deg);
+}

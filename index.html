@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invitación de Boda Lina y Carlos</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Alex+Brush&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+    
+    <!-- 1. Estilos de Swiper.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="leaves-container" class="leaves-container" aria-hidden="true"></div>
+    <!-- Marco Otoñal de Esquinas -->
+    <div class="autumn-corner top-left"></div>
+    <div class="autumn-corner top-right"></div>
+    <div class="autumn-corner bottom-left"></div>
+    <div class="autumn-corner bottom-right"></div>
+    <div class="page-wrapper">
+      <main class="invitation">
+        <section class="section portada fade-in">
+          <h1 class="title">TE INVITAMOS A NUESTRA BODA</h1>
+          <img
+            class="hero-image"
+            src="foto_pareja_1.jpg"
+            alt="Pareja en estilo pixel-art"
+          />
+          <div class="names-container">
+            <img src="donkey_kong.png" alt="Donkey Kong" class="pixel-icon">
+           <h1 class="title">Carlos & Lina</h1>
+            <img src="mulan_princess.jpg" alt="Mulan" class="pixel-icon">
+          </div>
+
+          <!-- 2. ESTRUCTURA DE LA GALERÍA (Justo debajo de los nombres) -->
+          <div class="swiper story-gallery">
+            <div class="swiper-wrapper">
+              <!-- Asegúrate de que los nombres de archivo coincidan exactamente -->
+              <div class="swiper-slide"><img src="hakodate_1.jpg" alt="Hakodate" loading="lazy"></div>
+              <div class="swiper-slide"><img src="mijayima_1.jpg" alt="Miyajima 1" loading="lazy"></div>}
+              <div class="swiper-slide"><img src="noboribetsu_jigokudani.jpg" alt="Noboribetsu Jigokudani" loading="lazy"></div>
+              <div class="swiper-slide"><img src="mijayima_2.jpg" alt="Miyajima 2" loading="lazy"></div>
+              <div class="swiper-slide"><img src="osaka_1.jpg" alt="Osaka 1" loading="lazy"></div>
+              <div class="swiper-slide"><img src="osaka_2.jpg" alt="Osaka 2" loading="lazy"></div>
+              <div class="swiper-slide"><img src="noboribetsu_osos.jpg" alt="Noboribetsu osos" loading="lazy"></div>
+              <div class="swiper-slide"><img src="aliba.jpg" alt="Aliba" loading="lazy"></div>
+              <div class="swiper-slide"><img src="comprando_bici.jpg" alt="Comprando bicicleta" loading="lazy"></div>
+              <div class="swiper-slide"><img src="cumple.jpg" alt="Cumpleaños" loading="lazy"></div>
+              <div class="swiper-slide"><img src="cumple1.jpg" alt="Cumpleaños 1" loading="lazy"></div>
+              <div class="swiper-slide"><img src="cumple_2.jpg" alt="Cumpleaños 2" loading="lazy"></div>
+              <div class="swiper-slide"><img src="medellin.jpg" alt="Medellín" loading="lazy"></div>
+              <div class="swiper-slide"><img src="san_andres_1.jpg" alt="San Andrés 1" loading="lazy"></div>
+              <div class="swiper-slide"><img src="san_andres_1_1.jpg" alt="San Andrés 1.1" loading="lazy"></div>
+              <div class="swiper-slide"><img src="san_andres_2.jpg" alt="San Andrés 2" loading="lazy"></div>
+              <div class="swiper-slide"><img src="primera_cita_virgilio.jpg" alt="Primera cita en Virgilio" loading="lazy"></div>
+              <div class="swiper-slide"><img src="villa_de_leyva.jpg" alt="Villa de Leyva" loading="lazy"></div>
+            </div>
+            <!-- Paginación (puntos opcionales abajo, ayudan a la UX) -->
+            <div class="swiper-pagination"></div>
+          </div>
+
+          <p class="subtitle">31 Oct 2026 - 3:30 PM</p>
+          <p class="location">Hotel Bella Tierra Tibasosa</p>
+          <div class="countdown" aria-live="polite">
+            <h2 class="section-title">Cuenta Regresiva</h2>
+            <div class="spacer"></div>
+            <div class="countdown-grid">
+              <article class="countdown-card">
+                <span id="days">00</span>
+                <small>Días</small>
+              </article>
+              <article class="countdown-card">
+                <span id="hours">00</span>
+                <small>Horas</small>
+              </article>
+              <article class="countdown-card">
+                <span id="minutes">00</span>
+                <small>Min</small>
+              </article>
+              <article class="countdown-card">
+                <span id="seconds">00</span>
+                <small>Seg</small>
+              </article>
+            </div>
+          </div>
+        </section>
+
+<section class="section historia fade-in">
+          <h2 class="section-title">Nuestro Comienzo</h2>
+          <div class="story-container">
+            <p id="typewriter-text" class="romantic-text"></p><span class="cursor">|</span>
+          </div>
+        </section>
+
+
+<section class="section detalles-lugar fade-in">
+          <h2 class="section-title">El Lugar</h2>
+          <div class="detail-card">
+            <h3>Hotel Bella Tierra</h3>
+            <p>Tibasosa, Boyacá</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Un escenario mágico rodeado de naturaleza donde uniremos nuestras vidas.</p>
+          </div>
+          <a
+            class="btn"
+            href="https://maps.google.com/?q=Hotel+Bella+Tierra+Tibasosa"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Ver en Google Maps</a
+          >
+        </section>
+
+        <section class="section itinerario fade-in">
+          <h2 class="section-title">Itinerario</h2>
+          <div class="itinerary-container">
+            <div class="itinerary-item">
+              <span class="time">3:30 PM</span>
+              <span class="activity">Recepción de invitados</span>
+            </div>
+            <div class="itinerary-item">
+              <span class="time">4:00 PM</span>
+              <span class="activity">Ceremonia en la capilla</span>
+            </div>
+            <div class="itinerary-item">
+              <span class="time">5:15 PM</span>
+              <span class="activity">Brindis</span>
+            </div>
+            <div class="itinerary-item">
+              <span class="time">5:30 PM</span>
+              <span class="activity">Coctel y fotos</span>
+            </div>
+            <div class="itinerary-item">
+              <span class="time">7:00 PM</span>
+              <span class="activity">Cena</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section dress-code fade-in">
+          <h2 class="section-title">Dress Code</h2>
+          <div class="detail-card">
+            <h3>Formal Elegante</h3>
+            <p>Sugerimos tonos tierra. Agradecemos evitar estrictamente el blanco y el rojo. </p>
+          </div>
+        </section>
+
+        <section class="section regalos fade-in">
+          <h2 class="section-title">Regalos</h2>
+          <div class="detail-card">
+            <p>
+              Tu presencia será nuestro mejor regalo. Si deseas tener un detalle con nosotros, 
+              este será recibido con mucho amor mediante lluvia de sobres el día del evento.
+            </p>
+          </div>
+        </section>
+
+        <section class="section rsvp fade-in">
+          <h2 class="section-title">Confirmación de asistencia</h2>
+          <form id="rsvpForm" class="rsvp-form" novalidate>
+            <label for="guestName">Nombre del invitado</label>
+            <input
+              id="guestName"
+              name="guestName"
+              type="text"
+              placeholder="Escribe tu nombre"
+              autocomplete="name"
+              required
+            />
+            
+            <!-- Hint original (se oculta al seleccionar) -->
+            <small id="guestHint" class="hint">Busca por nombre o apellido (ej. LUISA).</small>
+            
+            <!-- NUEVA TARJETA DE BIENVENIDA -->
+            <div id="welcomeCard" class="detail-card welcome-card hidden">
+              <h3>¡Estás Invitado!</h3>
+              <p id="welcomeCardText"></p>
+            </div>
+
+            <ul id="suggestions" class="suggestions" aria-label="Sugerencias"></ul>
+
+            <fieldset id="attendanceStep" class="step hidden">
+              <legend>¿Asistirás?</legend>
+              <div class="radio-group">
+                <label>
+                  <input type="radio" name="attendance" value="si" required />
+                  Sí, asistiré
+                </label>
+                <label>
+                  <input type="radio" name="attendance" value="no" required />
+                  No podré asistir
+                </label>
+              </div>
+            </fieldset>
+
+            <div id="yesStep" class="step hidden">
+              <p id="slotsInfo" class="slots-info"></p>
+              <div id="guestListContainer" class="guest-list-container">
+                <div class="guest-chip principal">
+                  <span id="principalGuestName">Invitado principal</span>
+                  <small>Confirmado</small>
+                </div>
+              </div>
+              
+              <!-- NUEVO BOTÓN UNIFICADO -->
+              <div id="guestButtons" class="guest-buttons">
+                <button id="addGuestBtn" class="btn pixel-text mini-btn" type="button">
+                  + Agregar Acompañante
+                </button>
+              </div>
+              <small id="slotsCompleteMsg" class="hint hidden">Has completado todos tus cupos.</small>
+
+              <label for="foodRestrictions">Restricciones alimentarias</label>
+              <textarea
+                id="foodRestrictions"
+                name="foodRestrictions"
+                rows="3"
+                placeholder="Ej: sin gluten, vegetariano, alergias..."
+              ></textarea>
+
+              <label for="message">Mensaje para los novios</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                placeholder="Déjanos un mensaje especial"
+              ></textarea>
+            </div>
+
+            <p id="declineMessage" class="decline hidden">
+              ¡Muchas gracias por responder! Esperamos compartir contigo en otra ocasión.
+            </p>
+
+            <button id="submitBtn" class="btn pixel-text" type="submit">
+              Confirmar respuesta
+            </button>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <!-- 3. Script de Swiper.js (IMPORTANTE: Antes de tu script.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script src="script.js"></script>
+  </body>
+</html>
