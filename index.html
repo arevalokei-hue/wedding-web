@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es">
   <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Invitación de Boda Lina y Carlos</title>
@@ -15,6 +16,71 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+  <!-- Invisible YouTube Player -->
+  <div id="youtube-player"></div>
+
+  <!-- Translucent Mute/Unmute Button -->
+  <div id="music-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; opacity: 0.5; cursor: pointer; background: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center;">
+    <!-- SVG Speaker Icon (Starts Muted) -->
+    <svg id="speaker-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+      <line x1="23" y1="9" x2="17" y2="15"></line>
+      <line x1="17" y1="9" x2="23" y2="15"></line>
+    </svg>
+  </div>
+
+  <!-- Load the YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    let player;
+    let isMuted = true;
+
+    // This function is automatically called by the YouTube API when it loads
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('youtube-player', {
+        height: '0',
+        width: '0',
+        videoId: 'iFx-5PGLgb4', // Carpenters - Close to you
+        playerVars: {
+          'autoplay': 1,
+          'controls': 0,
+          'origin': window.location.origin,
+          'loop': 1,
+          'playlist': 'iFx-5PGLgb4' // Playlist parameter is required for looping a single video
+        },
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+      // Start muted to comply with browser autoplay policies
+      event.target.mute(); 
+      event.target.playVideo();
+      
+      const toggleBtn = document.getElementById('music-toggle');
+      const speakerIcon = document.getElementById('speaker-icon');
+      
+      // Hover effects for the translucent icon
+      toggleBtn.addEventListener('mouseenter', () => toggleBtn.style.opacity = '1');
+      toggleBtn.addEventListener('mouseleave', () => toggleBtn.style.opacity = '0.5');
+
+      // Click handler to toggle audio and swap the SVG icon
+      toggleBtn.addEventListener('click', () => {
+        if (isMuted) {
+          player.unMute();
+          // Switch to Sound On Icon
+          speakerIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+        } else {
+          player.mute();
+          // Switch to Muted Icon
+          speakerIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+        }
+        isMuted = !isMuted;
+      });
+    }
+  </script>
     <div id="leaves-container" class="leaves-container" aria-hidden="true"></div>
     <!-- Marco Otoñal de Esquinas -->
     <div class="autumn-corner top-left"></div>
@@ -31,9 +97,7 @@
             alt="foto_pareja_1"
           />
           <div class="names-container">
-            <img src="donkey_kong.png" alt="Donkey Kong" class="pixel-icon">
            <h1 class="title">Carlos & Lina</h1>
-            <img src="mulan_princess.jpg" alt="Mulan" class="pixel-icon">
           </div>
 
           <!-- 2. ESTRUCTURA DE LA GALERÍA (Justo debajo de los nombres) -->
