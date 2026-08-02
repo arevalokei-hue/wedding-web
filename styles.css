@@ -622,3 +622,34 @@ fieldset {
   background-image: url('flores.png');
   transform: rotate(0deg);
 }
+
+/* =========================================
+   BOTONES DE MAPA (Icono grande, texto pequeño)
+========================================= */
+.map-btn {
+  display: flex !important;
+  flex-direction: column !important; /* Mueve el texto debajo del icono */
+  align-items: center !important;    /* Centra todo horizontalmente */
+  justify-content: center !important;
+  min-height: 120px !important;      /* Un poco más altos para dar respiro */
+  width: 145px !important;           /* Ancho fijo para que parezcan tarjetas iguales */
+  border-radius: 20px !important;    
+  padding: 15px 10px !important;
+  gap: 12px !important;              /* Espacio exacto entre el icono y el texto */
+  margin: 0 !important;              
+}
+
+.map-btn .btn-icon {
+  width: 60px !important;            /* ¡Icono gigante! */
+  height: 60px !important;
+  object-fit: contain;
+  margin: 0 !important;              
+}
+
+.map-btn .btn-text {
+  font-size: 0.65rem !important;     /* Texto mucho más pequeño y sutil */
+  line-height: 1.2 !important;
+  letter-spacing: 0.5px !important;
+  text-align: center;
+  margin: 0 !important;
+}

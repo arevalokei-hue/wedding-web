@@ -97,7 +97,7 @@
             alt="foto_pareja_1"
           />
           <div class="names-container">
-           <h1 class="title">Carlos & Lina</h1>
+           <h1 class="title">Lina & Carlos</h1>
           </div>
 
           <!-- 2. ESTRUCTURA DE LA GALERÍA (Justo debajo de los nombres) -->
@@ -125,7 +125,6 @@
           </div>
 
           <p class="subtitle">31 Oct 2026 - 3:30 PM</p>
-          <p class="location">Hotel Bella Tierra Tibasosa</p>
           <div class="countdown" aria-live="polite">
             <h2 class="section-title">Cuenta Regresiva</h2>
             <div class="spacer"></div>
@@ -165,13 +164,21 @@
             <p>Tibasosa, Boyacá</p>
             <p style="margin-top: 10px; font-size: 0.9rem;">Un escenario mágico rodeado de naturaleza donde uniremos nuestras vidas.</p>
           </div>
-          <a
-            class="btn"
-            href="https://maps.google.com/?q=Hotel+Bella+Tierra+Tibasosa"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Ver en Google Maps</a
-          >
+          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+              
+              <!-- Botón de Google Maps con icono -->
+              <a class="btn map-btn" href="https://maps.google.com/?q=Hotel+Bella+Tierra+Tibasosa" target="_blank" rel="noopener noreferrer">
+                <img src="google_maps_icon.png" alt="Google Maps" class="btn-icon" width="45" height="45">
+                <span class="btn-text"> Ver en Google Maps</span>
+              </a>
+
+              <!-- Botón de Waze con icono -->
+              <a class="btn map-btn" href="https://waze.com/ul?q=Hotel%20Bella%20Tierra%20Tibasosa&navigate=yes" target="_blank" rel="noopener noreferrer">
+                <img src="waze_icon.png" alt="Waze" class="btn-icon" width="45" height="45">
+                <span class="btn-text"> Ir con Waze</span>
+              </a>
+
+          </div>
         </section>
 
         <section class="section itinerario fade-in">
@@ -179,7 +186,7 @@
           <div class="itinerary-container">
             <div class="itinerary-item">
               <span class="time">3:30 PM</span>
-              <span class="activity">Recepción de invitados</span>
+              <span class="activity">Bienvenida de invitados</span>
             </div>
             <div class="itinerary-item">
               <span class="time">4:00 PM</span>
@@ -195,7 +202,7 @@
             </div>
             <div class="itinerary-item">
               <span class="time">7:00 PM</span>
-              <span class="activity">Cena</span>
+              <span class="activity">Cena y Recepción</span>
             </div>
           </div>
         </section>
