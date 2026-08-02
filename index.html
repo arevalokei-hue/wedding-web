@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-  <!-- Invisible YouTube Player -->
-  <div style="position: absolute; top: -9999px; left: -9999px; width: 10px; height: 10px; overflow: hidden;">
+<!-- Invisible YouTube Player (Tamaño válido para Chrome pero totalmente invisible visualmente) -->
+  <div style="position: fixed; bottom: 0; right: 0; width: 200px; height: 200px; opacity: 0; pointer-events: none; z-index: -9999; overflow: hidden;">
     <div id="youtube-player"></div>
   </div>
 
@@ -37,19 +37,18 @@
     let player;
     let isMuted = true;
 
-    // This function is automatically called by the YouTube API when it loads
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('youtube-player', {
-        height: '10', // Ya no es 0
-        width: '10',  // Ya no es 0
+        height: '200',
+        width: '200',
         videoId: 'iFx-5PGLgb4', // Carpenters - Close to you
         playerVars: {
           'autoplay': 1,
           'controls': 0,
           'origin': window.location.origin,
           'loop': 1,
-          'playsinline': 1, // CLAVE: Evita que iOS bloquee el reproductor o lo abra en fullscreen
-          'playlist': 'iFx-5PGLgb4' // Playlist parameter is required for looping a single video
+          'playsinline': 1,
+          'playlist': 'iFx-5PGLgb4'
         },
         events: {
           'onReady': onPlayerReady
@@ -57,45 +56,46 @@
       });
     }
 
-function onPlayerReady(event) {
-      // 1. Inicia muteado para cumplir con las políticas del navegador
+    function onPlayerReady(event) {
+      // 1. Inicia muteado para cumplir con las políticas de autoplay de Chrome y Safari
       event.target.mute(); 
       event.target.playVideo();
       
       const toggleBtn = document.getElementById('music-toggle');
       const speakerIcon = document.getElementById('speaker-icon');
       
-      // 2. FUNCIÓN MAESTRA: Despierta el audio al primer contacto
+      // 2. FUNCIÓN DE DESBLOQUEO: Escucha la primera interacción del usuario (Click, Touch o Scroll)
       const unlockAudio = () => {
         if (isMuted) {
           player.unMute();
-          player.playVideo(); // Aseguramos que reproduzca
+          player.setVolume(100);
+          player.playVideo();
           isMuted = false;
-          // Cambiamos el icono a "Sonido activado"
+          // Cambia el icono a sonido activado
           speakerIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
         }
         
-        // Limpiamos los "detectores" para que no consuman recursos de memoria una vez activado
+        // Se borran los detectores para que ocurra una sola vez y fluya la página
         document.removeEventListener('click', unlockAudio);
         document.removeEventListener('touchstart', unlockAudio);
         document.removeEventListener('scroll', unlockAudio);
       };
 
-      // 3. DETECTORES: Escuchan el primer clic, toque o scroll en TODA la página
+      // Registramos los 3 activadores universales
       document.addEventListener('click', unlockAudio, { once: true });
       document.addEventListener('touchstart', unlockAudio, { once: true });
       document.addEventListener('scroll', unlockAudio, { once: true });
 
-      // Efectos visuales del botón flotante
+      // Hover effects for the translucent icon
       toggleBtn.addEventListener('mouseenter', () => toggleBtn.style.opacity = '1');
       toggleBtn.addEventListener('mouseleave', () => toggleBtn.style.opacity = '0.5');
 
-      // 4. Botón manual (por si el usuario quiere apagar/prender la música después)
+      // Click manual en el botón flotante para mutear/desmutear a voluntad
       toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Evita que este clic dispare la función unlockAudio por error
-        
+        e.stopPropagation();
         if (isMuted) {
           player.unMute();
+          player.playVideo();
           speakerIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
         } else {
           player.mute();
