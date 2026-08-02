@@ -354,11 +354,10 @@ function onPlayerReady(event) {
             </button>
           </form>
         </section>
-        <!-- Reproductor Visible para Pruebas -->
-        <section class="section fade-in" style="text-align: center; margin-bottom: 50px; border: 1px dashed #ccc; padding: 20px;">
-          <p style="font-size: 0.8rem; color: gray; margin-bottom: 10px;">Área de prueba de audio</p>
+        <!-- Reproductor de YouTube Oculto -->
+        <div style="position: absolute; top: -9999px; left: -9999px; width: 320px; height: 180px; opacity: 0; pointer-events: none; z-index: -1;">
           <div id="youtube-player"></div>
-        </section>
+        </div>
       </main>
     </div>
 
