@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-
+  <div id="giant-invisible-btn" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99998; cursor: pointer; background: rgba(0,0,0,0); touch-action: manipulation;"></div>
   <!-- Translucent Mute/Unmute Button -->
   <div id="music-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; opacity: 1; cursor: pointer; background: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center;">
     <!-- SVG Speaker Icon (Starts Muted) -->
@@ -54,60 +54,52 @@
       });
     }
 
-    function onPlayerReady(event) {
+function onPlayerReady(event) {
+      // 1. Inicia muteado para cumplir la política
       event.target.mute(); 
       event.target.playVideo();
       
       const toggleBtn = document.getElementById('music-toggle');
+      const giantBtn = document.getElementById('giant-invisible-btn');
       
-      // FUNCIÓN DE INTENTO DE REPRODUCCIÓN Y VERIFICACIÓN
-      const attemptPlay = () => {
+      // FUNCIÓN MAESTRA DE DESBLOQUEO (Se activa al tocar el botón gigante)
+      const forceUnlockAudio = () => {
+        // Desmutear y dar volumen de inmediato (al ser un clic directo, Chrome no lo bloquea)
         player.unMute();
         player.setVolume(100);
         player.playVideo();
         
-        // REINTENTO: Verificamos si realmente funcionó después de 500ms
-        setTimeout(() => {
-          if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
-            console.warn("El navegador bloqueó la reproducción. Esperando un clic manual...");
-            // Revertimos la variable para que el próximo clic funcione correctamente
-            isMuted = true; 
-            actualizarIcono(true);
-          }
-        }, 500);
-      };
-
-      const unlockAudio = (e) => {
-        // Evitamos que el evento "scroll" dispare el audio porque Chrome lo suele rechazar
-        if (e.type === 'scroll') return; 
-
-        if (isMuted) {
-          attemptPlay();
-        }
+        // Destruir el botón gigante para que el usuario pueda usar la página (hacer scroll, ver fotos, etc.)
+        giantBtn.style.display = 'none';
         
-        // Limpiamos los eventos una vez detectado el primer clic/toque válido
-        document.removeEventListener('click', unlockAudio);
-        document.removeEventListener('touchstart', unlockAudio);
+        // Actualizar el estado interno y el botón visual
+        isMuted = false;
+        actualizarIcono(false);
       };
 
-      // Quitamos el 'scroll' de los activadores universales
-      document.addEventListener('click', unlockAudio, { once: true });
-      document.addEventListener('touchstart', unlockAudio, { once: true });
+      // Escuchamos el primer toque en la capa invisible gigante
+      if (giantBtn) {
+        giantBtn.addEventListener('click', forceUnlockAudio, { once: true });
+      }
 
-      // Efectos del botón
+      // Hover effects del botoncito flotante
       toggleBtn.addEventListener('mouseenter', () => toggleBtn.style.opacity = '1');
       toggleBtn.addEventListener('mouseleave', () => toggleBtn.style.opacity = '0.5');
 
-      // Clic manual en el botón
+      // Clic manual en el botón flotante (por si el usuario lo pausa después)
       toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
+        e.stopPropagation(); // Evita conflictos
         
-        // En lugar de confiar en 'isMuted', preguntamos el estado real del reproductor
-        if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
-          attemptPlay();
+        if (player.getPlayerState() !== YT.PlayerState.PLAYING || isMuted) {
+          player.unMute();
+          player.playVideo();
+          isMuted = false;
+          actualizarIcono(false);
         } else {
           player.mute();
-          player.pauseVideo(); // Es mejor pausarlo completamente
+          player.pauseVideo();
+          isMuted = true;
+          actualizarIcono(true);
         }
       });
     }
