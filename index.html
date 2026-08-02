@@ -17,7 +17,9 @@
   </head>
   <body>
   <!-- Invisible YouTube Player -->
-  <div id="youtube-player"></div>
+  <div style="position: absolute; top: -9999px; left: -9999px; width: 10px; height: 10px; overflow: hidden;">
+    <div id="youtube-player"></div>
+  </div>
 
   <!-- Translucent Mute/Unmute Button -->
   <div id="music-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; opacity: 0.5; cursor: pointer; background: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center;">
@@ -38,14 +40,15 @@
     // This function is automatically called by the YouTube API when it loads
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('youtube-player', {
-        height: '0',
-        width: '0',
+        height: '10', // Ya no es 0
+        width: '10',  // Ya no es 0
         videoId: 'iFx-5PGLgb4', // Carpenters - Close to you
         playerVars: {
           'autoplay': 1,
           'controls': 0,
           'origin': window.location.origin,
           'loop': 1,
+          'playsinline': 1, // CLAVE: Evita que iOS bloquee el reproductor o lo abra en fullscreen
           'playlist': 'iFx-5PGLgb4' // Playlist parameter is required for looping a single video
         },
         events: {
