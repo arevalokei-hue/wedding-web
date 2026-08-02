@@ -16,13 +16,14 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
- <!-- Invisible YouTube Player (Corregido para que no se pause) -->
-  <div style="position: fixed; bottom: 0; right: 0; width: 2px; height: 2px; opacity: 0; pointer-events: none; z-index: -9999;">
+  <!-- Invisible YouTube Player -->
+  <div style="position: absolute; top: -9999px; left: -9999px; width: 10px; height: 10px; overflow: hidden;">
     <div id="youtube-player"></div>
   </div>
 
   <!-- Translucent Mute/Unmute Button -->
   <div id="music-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; opacity: 0.5; cursor: pointer; background: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center;">
+    <!-- SVG Speaker Icon (Starts Muted) -->
     <svg id="speaker-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
       <line x1="23" y1="9" x2="17" y2="15"></line>
@@ -36,67 +37,65 @@
     let player;
     let isMuted = true;
 
+    // This function is automatically called by the YouTube API when it loads
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('youtube-player', {
-        height: '10',
-        width: '10',
-        videoId: 'iFx-5PGLgb4', 
+        height: '10', // Ya no es 0
+        width: '10',  // Ya no es 0
+        videoId: 'iFx-5PGLgb4', // Carpenters - Close to you
         playerVars: {
           'autoplay': 1,
           'controls': 0,
+          'origin': 'https://arevalokei-hue.github.io',
           'loop': 1,
-          'playsinline': 1, 
-          'playlist': 'iFx-5PGLgb4', 
-          'enablejsapi': 1 // Habilitamos la API oficialmente. ELIMINAMOS EL ORIGIN.
+          'playsinline': 1, // CLAVE: Evita que iOS bloquee el reproductor o lo abra en fullscreen
+          'playlist': 'iFx-5PGLgb4' // Playlist parameter is required for looping a single video
         },
         events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange // Nuevo escudo contra pausas automáticas
+          'onReady': onPlayerReady
         }
       });
     }
 
-    // Si el navegador intenta pausar la música, la forzamos a seguir
-    function onPlayerStateChange(event) {
-      if (event.data === YT.PlayerState.PAUSED && !isMuted) {
-        player.playVideo();
-      }
-    }
-
-    function onPlayerReady(event) {
+function onPlayerReady(event) {
+      // 1. Inicia muteado para cumplir con las políticas del navegador
       event.target.mute(); 
       event.target.playVideo();
       
       const toggleBtn = document.getElementById('music-toggle');
       const speakerIcon = document.getElementById('speaker-icon');
       
+      // 2. FUNCIÓN MAESTRA: Despierta el audio al primer contacto
       const unlockAudio = () => {
         if (isMuted) {
           player.unMute();
-          player.setVolume(100); 
-          player.playVideo(); 
+          player.playVideo(); // Aseguramos que reproduzca
           isMuted = false;
+          // Cambiamos el icono a "Sonido activado"
           speakerIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
         }
         
+        // Limpiamos los "detectores" para que no consuman recursos de memoria una vez activado
         document.removeEventListener('click', unlockAudio);
         document.removeEventListener('touchstart', unlockAudio);
         document.removeEventListener('scroll', unlockAudio);
       };
 
+      // 3. DETECTORES: Escuchan el primer clic, toque o scroll en TODA la página
       document.addEventListener('click', unlockAudio, { once: true });
       document.addEventListener('touchstart', unlockAudio, { once: true });
       document.addEventListener('scroll', unlockAudio, { once: true });
 
+      // Efectos visuales del botón flotante
       toggleBtn.addEventListener('mouseenter', () => toggleBtn.style.opacity = '1');
       toggleBtn.addEventListener('mouseleave', () => toggleBtn.style.opacity = '0.5');
 
+      // 4. Botón manual (por si el usuario quiere apagar/prender la música después)
       toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); 
+        e.stopPropagation(); // Evita que este clic dispare la función unlockAudio por error
         
         if (isMuted) {
           player.unMute();
-          player.playVideo(); 
           speakerIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
         } else {
           player.mute();
