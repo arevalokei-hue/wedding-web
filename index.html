@@ -16,13 +16,9 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-<!-- Invisible YouTube Player (Tamaño válido para Chrome pero totalmente invisible visualmente) -->
-  <div style="position: fixed; bottom: 0; right: 0; width: 200px; height: 200px; opacity: 0; pointer-events: none; z-index: -9999; overflow: hidden;">
-    <div id="youtube-player"></div>
-  </div>
 
   <!-- Translucent Mute/Unmute Button -->
-  <div id="music-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; opacity: 0.5; cursor: pointer; background: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center;">
+  <div id="music-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; opacity: 1; cursor: pointer; background: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center;">
     <!-- SVG Speaker Icon (Starts Muted) -->
     <svg id="speaker-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -328,6 +324,11 @@
               Confirmar respuesta
             </button>
           </form>
+        </section>
+        <!-- Reproductor Visible para Pruebas -->
+        <section class="section fade-in" style="text-align: center; margin-bottom: 50px; border: 1px dashed #ccc; padding: 20px;">
+          <p style="font-size: 0.8rem; color: gray; margin-bottom: 10px;">Área de prueba de audio</p>
+          <div id="youtube-player"></div>
         </section>
       </main>
     </div>
