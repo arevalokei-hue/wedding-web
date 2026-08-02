@@ -57,27 +57,48 @@
       });
     }
 
-    function onPlayerReady(event) {
-      // Start muted to comply with browser autoplay policies
+function onPlayerReady(event) {
+      // 1. Inicia muteado para cumplir con las políticas del navegador
       event.target.mute(); 
       event.target.playVideo();
       
       const toggleBtn = document.getElementById('music-toggle');
       const speakerIcon = document.getElementById('speaker-icon');
       
-      // Hover effects for the translucent icon
+      // 2. FUNCIÓN MAESTRA: Despierta el audio al primer contacto
+      const unlockAudio = () => {
+        if (isMuted) {
+          player.unMute();
+          player.playVideo(); // Aseguramos que reproduzca
+          isMuted = false;
+          // Cambiamos el icono a "Sonido activado"
+          speakerIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+        }
+        
+        // Limpiamos los "detectores" para que no consuman recursos de memoria una vez activado
+        document.removeEventListener('click', unlockAudio);
+        document.removeEventListener('touchstart', unlockAudio);
+        document.removeEventListener('scroll', unlockAudio);
+      };
+
+      // 3. DETECTORES: Escuchan el primer clic, toque o scroll en TODA la página
+      document.addEventListener('click', unlockAudio, { once: true });
+      document.addEventListener('touchstart', unlockAudio, { once: true });
+      document.addEventListener('scroll', unlockAudio, { once: true });
+
+      // Efectos visuales del botón flotante
       toggleBtn.addEventListener('mouseenter', () => toggleBtn.style.opacity = '1');
       toggleBtn.addEventListener('mouseleave', () => toggleBtn.style.opacity = '0.5');
 
-      // Click handler to toggle audio and swap the SVG icon
-      toggleBtn.addEventListener('click', () => {
+      // 4. Botón manual (por si el usuario quiere apagar/prender la música después)
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Evita que este clic dispare la función unlockAudio por error
+        
         if (isMuted) {
           player.unMute();
-          // Switch to Sound On Icon
           speakerIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
         } else {
           player.mute();
-          // Switch to Muted Icon
           speakerIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
         }
         isMuted = !isMuted;

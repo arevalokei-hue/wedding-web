@@ -445,35 +445,47 @@ const payload = {
   });
 });
 
-
-// ... (resto de tu código script.js existente arriba)
-
 // =========================================
 // 4. INICIALIZACIÓN DE LA GALERÍA (SWIPER)
 // =========================================
-// Esta parte puede ir fuera del DOMContentLoaded porque Swiper sabe cuándo cargarse
 const swiper = new Swiper('.story-gallery', {
-  // Parámetros básicos
   direction: 'horizontal',
-  loop: true, // Movimiento infinito
-  grabCursor: true, // Cambia el cursor a una mano en PC para indicar que se puede arrastrar
+  loop: true, 
+  grabCursor: true, 
 
-  // Configuración del Autoplay (movimiento automático)
   autoplay: {
-    delay: 3000, // 3000 milisegundos = 3 segundos
-    disableOnInteraction: false, // Importante: No detiene el autoplay si el usuario interactúa
+    // 1. AUMENTAMOS EL TIEMPO: Cambiamos 3000 por 5000 (5 segundos por foto)
+    delay: 4000, 
+    disableOnInteraction: false, 
   },
-
-  // Paginación (los puntitos de abajo)
   pagination: {
     el: '.swiper-pagination',
-    clickable: true, // Permite hacer clic en los puntos para ir a la foto
+    clickable: true, 
   },
-
-  // Efecto de transición (opcional, por defecto es 'slide' que es lo que pediste)
-  // effect: 'slide', 
-  speed: 800, // Velocidad de la transición (ms), hace el movimiento más suave
+  speed: 800, 
 });
+
+// 2. DETENEMOS LA GALERÍA al cargar la página
+swiper.autoplay.stop();
+
+// 3. OBSERVADOR: Espera a que la galería sea visible en pantalla
+const gallerySection = document.querySelector('.story-gallery');
+
+if (gallerySection) {
+  const galleryObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Cuando al menos la mitad de la galería se ve en pantalla, arranca
+        swiper.autoplay.start();
+      } else {
+        // Opcional y muy optimizado: si el usuario sigue bajando y la galería desaparece, se pausa
+        swiper.autoplay.stop();
+      }
+    });
+  }, { threshold: 0.5 }); // 0.5 significa que debe verse el 50% de la foto para activar
+
+  galleryObserver.observe(gallerySection);
+}
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
