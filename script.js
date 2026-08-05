@@ -247,7 +247,8 @@ function selectGuest(guest) {
   selectedGuest = guest;
   guestNameInput.value = guest.nombre;
   suggestions.innerHTML = "";
-  
+  // === ESTA LÍNEA SE USA PARA REINICIAR EL TÍTULO ===
+  welcomeCard.querySelector("h3").textContent = "¡Estás Invitado!";
   // Mostrar el mensaje bonito en la nueva tarjeta
   if (guest.mensaje && guest.mensaje.trim() !== "") {
     welcomeCardText.textContent = `${guest.mensaje}`;
@@ -376,11 +377,31 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   if (!selectedGuest) {
-    guestHint.textContent = "Selecciona tu nombre desde la lista antes de continuar.";
+    // Intentamos adivinar el nombre más similar
+    const query = guestNameInput.value;
+    const bestMatch = findBestMatch(query);
+
+    if (bestMatch) {
+      // Le pedimos al usuario que confirme si es él mediante un popup nativo
+      const confirmed = window.confirm(`¿Buscabas a ${bestMatch.nombre}? Haz clic en Aceptar para seleccionarlo.`);
+      
+      if (confirmed) {
+        selectGuest(bestMatch);
+        guestHint.textContent = "¡Nombre seleccionado! Por favor, continúa marcando si asistirás.";
+        guestHint.classList.remove("hidden");
+        return; // Detenemos el envío final para que puedan llenar la asistencia
+      }
+    }
+
+    // Si no encontró coincidencias o si el usuario le dio "Cancelar" a la alerta
+    guestHint.innerHTML = "Intente probando con uno de sus nombres nuevamente y seleccionando de la lista que aparece justo debajo del recuadro.";
+    guestHint.style.color = "#6D0F14"; // Tono vino tinto de tu diseño para que resalte el error
+    guestHint.style.fontWeight = "600";
     guestHint.classList.remove("hidden");
     return;
   }
 
+  // --- EL RESTO DE TU CÓDIGO QUEDA IGUAL A PARTIR DE AQUÍ ---
   const attendance = form.querySelector("input[name='attendance']:checked");
   if (!attendance) return;
 
@@ -488,6 +509,62 @@ if (gallerySection) {
   }, { threshold: 0.5 }); // 0.5 significa que debe verse el 50% de la foto para activar
 
   galleryObserver.observe(gallerySection);
+}
+
+// =========================================
+// NUEVAS FUNCIONES: BÚSQUEDA DEL NOMBRE MÁS SIMILAR
+// =========================================
+
+// Algoritmo para medir cuántos "errores" o diferencias hay entre dos textos
+function levenshtein(a, b) {
+  const matrix = [];
+  for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+  for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j] + 1
+        );
+      }
+    }
+  }
+  return matrix[b.length][a.length];
+}
+
+function findBestMatch(query) {
+  const cleanQuery = normalizeText(query);
+  if (!cleanQuery) return null;
+
+  // 1. Intentar buscar coincidencia directa/parcial primero
+  const directMatches = findGuestsByQuery(query);
+  if (directMatches.length > 0) {
+    return directMatches[0]; // Retorna la mejor coincidencia directa
+  }
+
+  // 2. Si no hay coincidencia directa, buscar el más similar
+  let bestMatch = null;
+  let minDistance = Infinity;
+
+  invitadosData.forEach(guest => {
+    const guestName = normalizeText(guest.nombre);
+    const distance = levenshtein(cleanQuery, guestName);
+    if (distance < minDistance) {
+      minDistance = distance;
+      bestMatch = guest;
+    }
+  });
+
+  // Si la diferencia es razonable (ej. máximo 5-6 errores de tipeo), lo sugerimos
+  if (minDistance <= 6) {
+    return bestMatch;
+  }
+
+  return null;
 }
 
 updateCountdown();
