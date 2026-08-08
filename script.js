@@ -145,12 +145,12 @@ const invitadosData = [
   { 'nombre': 'Marta Rodriguez Perez','mensaje': 'Marta y Pascual','cantidadCupos': '2'},
   { 'nombre': 'Natalia Univio Rodriguez','mensaje': 'Natalia y Familia','cantidadCupos': '4'},
   { 'nombre': 'Angela Maria Vega','mensaje': 'Angela Maria y Familia','cantidadCupos': '4'},
-  { 'nombre': 'Yanet Rodriguez Perez','mensaje': 'Yanet y Fredy','cantidadCupos': '2'},
+  { 'nombre': 'Paulina Yaneth Rodriguez Perez','mensaje': 'Yaneth y Fredy','cantidadCupos': '2'},
   { 'nombre': 'Angie Rodriguez','mensaje': 'Angie y Mathias','cantidadCupos': '2'},
-  { 'nombre': 'Fernanda Rodriguez','mensaje': 'Fernanda y Familia','cantidadCupos': '3'},
+  { 'nombre': 'Paula Fernanda Rodriguez','mensaje': 'Fernanda y Familia','cantidadCupos': '3'},
   { 'nombre': 'Laura Viviana Rodriguez','mensaje': 'Viviana e Hijos','cantidadCupos': '3'},
   { 'nombre': 'Jorge Alexander Sierra','mensaje': '','cantidadCupos': '1'},
-  { 'nombre': 'Catalina Galeano','mensaje': '','cantidadCupos': '1'},
+  { 'nombre': 'Catalina Galeano Soto','mensaje': '','cantidadCupos': '1'},
   { 'nombre': 'Ivan Andres Chaparro','mensaje': 'Andres','cantidadCupos': '1'},
   { 'nombre': 'Esteban Zamudio','mensaje': 'Esteban y Patricia','cantidadCupos': '2'},
   { 'nombre': 'Felipe Chaparro','mensaje': '','cantidadCupos': '1'},
@@ -160,9 +160,6 @@ const invitadosData = [
   { 'nombre': 'Luis Miguel Morales','mensaje': 'Piggy(Poggy)','cantidadCupos': '1'},
   { 'nombre': 'Brayan Calderon','mensaje': '','cantidadCupos': '1'},
   { 'nombre': 'Andres Colmenares','mensaje': '','cantidadCupos': '1'},
-  { 'nombre': 'Juan Carlos Diaz','mensaje': 'Juan Carlos y Familia','cantidadCupos': '3'},
-  { 'nombre': 'Camilo Andres Martinez Joya','mensaje': 'Camilo e Hijos','cantidadCupos': '4'},
-  { 'nombre': 'Elby Carolina Rodriguez Joya','mensaje': 'Abuelo Oscar, Carolina y Familia','cantidadCupos': '4'},
 ];
 
 const targetDate = new Date("2026-10-31T15:30:00-05:00");
