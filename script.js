@@ -216,9 +216,12 @@ function updateCountdown() {
 }
 
 function normalizeText(value) {
-  return value.trim().toLowerCase();
+  return value
+    .trim()
+    .toLowerCase()
+    .normalize("NFD") // Separa la letra de la tilde (ej: "á" -> "a" + "´")
+    .replace(/[\u0300-\u036f]/g, ""); // Elimina todos los símbolos de acentos
 }
-
 function findGuestsByQuery(query) {
   const cleanQuery = normalizeText(query);
   if (!cleanQuery) {
