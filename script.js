@@ -160,6 +160,7 @@ const invitadosData = [
   { 'nombre': 'Luis Miguel Morales','mensaje': 'Piggy(Poggy)','cantidadCupos': '1'},
   { 'nombre': 'Brayan Calderon','mensaje': '','cantidadCupos': '1'},
   { 'nombre': 'Andres Colmenares','mensaje': '','cantidadCupos': '1'},
+  { 'nombre': 'Yuly Mariana Pinto','mensaje': '','cantidadCupos': '1'},
 ];
 
 const targetDate = new Date("2026-10-31T15:30:00-05:00");
