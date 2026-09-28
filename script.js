@@ -149,7 +149,7 @@ const invitadosData = [
   { 'nombre': 'Angie Rodriguez','mensaje': 'Angie y Mathias','cantidadCupos': '2'},
   { 'nombre': 'Paula Fernanda Rodriguez','mensaje': 'Fernanda y Familia','cantidadCupos': '3'},
   { 'nombre': 'Laura Viviana Rodriguez','mensaje': 'Viviana e Hijos','cantidadCupos': '3'},
-  { 'nombre': 'Jorge Alexander Sierra','mensaje': '','cantidadCupos': '1'},
+  { 'nombre': 'Jorge Alexander Sierra','mensaje': 'Jorge y Acompañante','cantidadCupos': '2'},
   { 'nombre': 'Catalina Galeano Soto','mensaje': '','cantidadCupos': '1'},
   { 'nombre': 'Ivan Andres Chaparro','mensaje': 'Andres','cantidadCupos': '1'},
   { 'nombre': 'Esteban Zamudio','mensaje': 'Esteban y Patricia','cantidadCupos': '2'},
